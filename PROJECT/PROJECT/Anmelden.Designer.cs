@@ -42,7 +42,6 @@ namespace PROJECT
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,13 +107,14 @@ namespace PROJECT
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(33, 359);
+            this.dataGridView1.Location = new System.Drawing.Point(236, 359);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(878, 194);
+            this.dataGridView1.Size = new System.Drawing.Size(427, 194);
             this.dataGridView1.TabIndex = 7;
             // 
             // label3
@@ -132,15 +132,18 @@ namespace PROJECT
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label4.Location = new System.Drawing.Point(541, 267);
+            this.label4.Location = new System.Drawing.Point(536, 267);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(139, 24);
             this.label4.TabIndex = 9;
             this.label4.Text = "Konto erstellen";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label4.MouseLeave += new System.EventHandler(this.label4_MouseLeave);
+            this.label4.MouseHover += new System.EventHandler(this.label4_MouseHover);
             // 
             // label5
             // 
@@ -159,7 +162,7 @@ namespace PROJECT
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.label6.Location = new System.Drawing.Point(29, 320);
+            this.label6.Location = new System.Drawing.Point(395, 332);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(123, 24);
             this.label6.TabIndex = 11;
@@ -202,23 +205,12 @@ namespace PROJECT
             this.label9.Text = "// Passwort: Admin";
             this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(400, 320);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Admin Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Anmelden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.ClientSize = new System.Drawing.Size(955, 681);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -255,7 +247,6 @@ namespace PROJECT
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
     }
 }
 

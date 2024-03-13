@@ -13,11 +13,40 @@ namespace PROJECT
 {
     public partial class AdminHomepage : Form
     {
+
         OleDbConnection con = new OleDbConnection();
         OleDbCommand cmd = new OleDbCommand();
         OleDbDataReader dr = null;
         DataSet ds = new DataSet();
         OleDbDataAdapter da = new OleDbDataAdapter();
+        int Account = Anmelden.AccountID;
+
+        public static void LoadAccount(OleDbCommand cmd, OleDbDataReader dr, OleDbConnection con, int Account, Label label2, Label label3)      
+        {
+            try
+            {
+                cmd.CommandText = "select * from Accounts where A_ID =" + Account;
+
+                if (dr != null)
+                {
+                    dr.Close();
+                }
+                cmd.Connection = con;
+                dr = cmd.ExecuteReader();
+
+                dr.Read();
+
+                label2.Text = dr.GetString(2);
+                label3.Text = dr.GetString(1);
+
+                dr.Close();
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Anmeldefehler" + a);
+            }
+        }
+
 
         public AdminHomepage()
         {
@@ -73,6 +102,7 @@ namespace PROJECT
                 MessageBox.Show("Datenbanköffnungsfehler\n" + a);
                 this.Close();
             }
+            AdminHomepage.LoadAccount(cmd, dr, con, Account, label2, label3);          
         }
 
 
@@ -93,12 +123,68 @@ namespace PROJECT
 
         private void button5_Click(object sender, EventArgs e)
         {
+            this.Hide();
             var Flugzeuge_Verwalten = new Flugzeuge_Verwalten();
             Flugzeuge_Verwalten.Location = this.Location;
             Flugzeuge_Verwalten.StartPosition = FormStartPosition.Manual;
             Flugzeuge_Verwalten.FormClosing += delegate { this.Show(); };
-            Flugzeuge_Verwalten.Show();
+            Flugzeuge_Verwalten.ShowDialog();
+            this.Close();
+        }
+
+        private void Abmelden_Click(object sender, EventArgs e)
+        {
             this.Hide();
+            var Anmelden = new Anmelden();
+            Anmelden.Location = this.Location;
+            Anmelden.StartPosition = FormStartPosition.Manual;
+            Anmelden.FormClosing += delegate { this.Show(); };
+            Anmelden.ShowDialog();
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var Pilot_Verwaltung = new Pilot_Verwaltung();
+            Pilot_Verwaltung.Location = this.Location;
+            Pilot_Verwaltung.StartPosition = FormStartPosition.Manual;
+            Pilot_Verwaltung.FormClosing += delegate { this.Show(); };
+            Pilot_Verwaltung.ShowDialog();
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var Gepäcke_Verwalten = new Gepäcke_Verwalten();
+            Gepäcke_Verwalten.Location = this.Location;
+            Gepäcke_Verwalten.StartPosition = FormStartPosition.Manual;
+            Gepäcke_Verwalten.FormClosing += delegate { this.Show(); };
+            Gepäcke_Verwalten.ShowDialog();
+            this.Close();
+
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var Accounts_Verwalten = new Accounts_Verwalten();
+            Accounts_Verwalten.Location = this.Location;
+            Accounts_Verwalten.StartPosition = FormStartPosition.Manual;
+            Accounts_Verwalten.FormClosing += delegate { this.Show(); };
+            Accounts_Verwalten.ShowDialog();
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var Flüge_Verwalten = new Flüge_Verwalten();
+            Flüge_Verwalten.Location = this.Location;
+            Flüge_Verwalten.StartPosition = FormStartPosition.Manual;
+            Flüge_Verwalten.FormClosing += delegate { this.Show(); };
+            Flüge_Verwalten.ShowDialog();
+            this.Close();            
         }
     }
 }

@@ -12,6 +12,10 @@ namespace PROJECT
 {
     public partial class Anmelden : Form 
     {
+        public static int AccountID
+        {
+            get; set;
+        }
         OleDbConnection con = new OleDbConnection();
         OleDbCommand cmd = new OleDbCommand();
         OleDbDataReader dr = null;
@@ -75,6 +79,8 @@ namespace PROJECT
 
         public void Form1_Load(object sender, EventArgs e)
         {
+            textBox3.Text = "";
+            textBox1.Text = "";
             try
             {
                 con.ConnectionString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = FlughafenDB.accdb";
@@ -104,8 +110,44 @@ namespace PROJECT
                 dr = cmd.ExecuteReader();
                 dr.Read();
                 int Account = dr.GetInt32(0);
-                MessageBox.Show($"Wilkommen! Account: {Account}");
-               
+                AccountID = Account;
+
+                try
+                {
+                    cmd.CommandText = "select * from Accounts where A_ID =" + Account;
+                    cmd.Connection = con;
+                    if (dr != null)
+                    {
+                        dr.Close();
+                    }
+                    dr = cmd.ExecuteReader();
+                    dr.Read();
+                    if (dr.GetBoolean(8) == true)
+                    {
+                        this.Hide();
+                        var AdminHomepage = new AdminHomepage();
+                        AdminHomepage.Location = this.Location;
+                        AdminHomepage.StartPosition = FormStartPosition.Manual;
+                        AdminHomepage.FormClosing += delegate { this.Show(); };
+                        AdminHomepage.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        this.Hide();
+                        var Homepage = new Homepage();
+                        Homepage.Location = this.Location;
+                        Homepage.StartPosition = FormStartPosition.Manual;
+                        Homepage.FormClosing += delegate { this.Show(); };
+                        Homepage.ShowDialog();
+                        this.Close();
+                    }
+                    dr.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Anmeldefehler");
+                }
             }
             catch
             {
@@ -116,17 +158,23 @@ namespace PROJECT
 
         private void label4_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            var kontoerstellen = new kontoerstellen();
+            kontoerstellen.Location = this.Location;
+            kontoerstellen.StartPosition = FormStartPosition.Manual;
+            kontoerstellen.FormClosing += delegate { this.Show(); };
+            kontoerstellen.ShowDialog();
+            this.Close();          
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label4_MouseHover(object sender, EventArgs e)
         {
-            var AdminHomepage = new AdminHomepage();
-            AdminHomepage.Location = this.Location;
-            AdminHomepage.StartPosition = FormStartPosition.Manual;
-            AdminHomepage.FormClosing += delegate { this.Show(); };
-            AdminHomepage.Show();
-            this.Hide();
+            label4.ForeColor = Color.White;
+        }
+
+        private void label4_MouseLeave(object sender, EventArgs e)
+        {
+            label4.ForeColor = Color.DarkSlateBlue;
         }
     }
 }
